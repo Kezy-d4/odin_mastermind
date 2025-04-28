@@ -1,1 +1,1 @@
-# odin_mastermind
+# Mastermind
