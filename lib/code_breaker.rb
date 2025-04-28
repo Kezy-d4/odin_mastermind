@@ -1,7 +1,5 @@
 require_relative "code_peg"
 
-class CodeMaker
-  
+class CodeBreaker
+
 end
-
-

@@ -1,12 +1,10 @@
 require_relative "code_maker"
+require_relative "code_breaker"
 
 class Game
-  attr_reader :code_maker, :secret_code
-
   def initialize
     @code_maker = CodeMaker.new
-    @secret_code = code_maker.generate_secret_code
+    @code_breaker = CodeBreaker.new
   end
 end
 
-puts Game.new.secret_code

@@ -28,3 +28,4 @@ AllCops:
     - "lib/code_peg.rb"
     - "lib/code_maker.rb"
     - "lib/game.rb"
+    - "lib/code_breaker.rb"
