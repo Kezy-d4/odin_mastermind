@@ -1,0 +1,23 @@
+THE TASK (PHASE 1)
+Build a Mastermind game from the command line where you have 12 (10) turns 
+to guess the secret code, starting with you guessing the computer’s random code.
+Build the game assuming the computer randomly selects the secret colors and 
+the human player must guess them. Remember that you need to give the proper 
+feedback on how good the guess was each turn!
+
+THE PLAN (PHASE 1)
+  - Have the computer randomly select its 4 color code from a selection of 
+    6 colors, allowing any number of duplicate colors, but not any blanks. 
+
+  - Have the player input their guess so that the computer can respond with the 
+    appropriate feedback; that is, a red peg for each present color in the 
+    correct position, a white peg for each present color in the wrong position, 
+    and no peg for each color not present in the code.
+
+  - Repeat the previous step until the player has correctly guessed the code or
+    has exhausted their 10 available guesses.
+
+  - Announce the winner. If the player is not able to guess the code, 
+    the computer wins. If the player is able to guess the code, they win, 
+    so announce the number of turns it took for them to get guess the code.
+
