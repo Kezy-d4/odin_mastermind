@@ -25,7 +25,7 @@ Style/FrozenStringLiteralComment:
 AllCops:
   Exclude:
     - "mastermind.rb"
-    - "lib/code_peg.rb"
-    - "lib/code_maker.rb"
-    - "lib/game.rb"
-    - "lib/code_breaker.rb"
+    - "game.rb"
+    - "code_peg.rb"
+    - "computer_code_maker.rb"
+    - "human_code_breaker.rb"
