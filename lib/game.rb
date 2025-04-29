@@ -7,4 +7,3 @@ class Game
     @code_breaker = CodeBreaker.new
   end
 end
-
