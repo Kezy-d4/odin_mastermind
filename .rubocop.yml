@@ -26,6 +26,6 @@ AllCops:
   Exclude:
     - "mastermind.rb"
     - "lib/game.rb"
-    - "lib/code_peg.rb"
     - "lib/computer_code_maker.rb"
     - "lib/human_code_breaker.rb"
+    - "lib/board.rb"
