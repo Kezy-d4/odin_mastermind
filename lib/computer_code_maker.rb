@@ -1,3 +1,5 @@
+require "colorize"
+
 class ComputerCodeMaker
   attr_reader :secret_code_range, :secret_code_length, :secret_code
 
@@ -14,12 +16,12 @@ class ComputerCodeMaker
   end
 
   def print_secret_code
-    secret_code.each { |number| print "#{number} " }
+    secret_code.each { |number| print "#{number} ".colorize(:red) }
     puts
   end
 
   def obscure_secret_code
-    secret_code.each { print "? " }
+    secret_code.each { print "? ".colorize(:red) }
     puts
   end
 end

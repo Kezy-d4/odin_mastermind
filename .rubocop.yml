@@ -29,3 +29,4 @@ AllCops:
     - "lib/computer_code_maker.rb"
     - "lib/human_code_breaker.rb"
     - "lib/board.rb"
+    - "lib/message.rb"
