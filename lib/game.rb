@@ -56,9 +56,18 @@ class Game
   end
 
   def update_next_guess(guess)
+    unless valid_guess?(guess)
+      invalid
+      return
+    end
     guess = guess.chars.map(&:to_i)
     guess_rows_set[code_breaker.attempts_made] = guess
     code_breaker.attempts_made += 1
+  end
+
+  def valid_guess?(guess)
+    guess.length == code_maker.secret_code_length &&
+      guess.chars.all? { |chr| code_maker.secret_code_range.include?(chr.to_i) }
   end
 end
 

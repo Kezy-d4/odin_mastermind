@@ -6,6 +6,10 @@ module Message
          "#{secret_code_range.to_a.last}: "
   end
 
+  def invalid
+    puts "Invalid previous entry! Try again."
+  end
+
   def you_win
     puts "You win!"
   end
