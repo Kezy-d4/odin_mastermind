@@ -22,11 +22,12 @@ Style/FrozenStringLiteralComment:
 
 # Project wide Rubocop toggle. Add each new file to be excluded to this config,
 # then toggle on/off via a code comment:
-# AllCops:
-#   Exclude:
-#     - "mastermind.rb"
-#     - "lib/game.rb"
-#     - "lib/computer_code_maker.rb"
-#     - "lib/human_code_breaker.rb"
-#     - "lib/board.rb"
-#     - "lib/message.rb"
+AllCops:
+  Exclude:
+    - "mastermind.rb"
+    - "lib/game.rb"
+    - "lib/computer_code_maker.rb"
+    - "lib/human_code_breaker.rb"
+    - "lib/board.rb"
+    - "lib/message.rb"
+    - "lib/test.rb"

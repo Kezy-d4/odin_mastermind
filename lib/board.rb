@@ -30,7 +30,8 @@ class Board
   end
 
   def print_board
-    game_over? ? code_maker.print_secret_code : code_maker.obscure_secret_code
+    # game_over? ? code_maker.print_secret_code : code_maker.obscure_secret_code
+    code_maker.print_secret_code # Cheating
     print_code_breaker_rows
   end
 
@@ -48,7 +49,7 @@ class Board
       invalid
       return
     end
-    guess_arr = guess_str.chars.each(&:to_i)
+    guess_arr = guess_str.chars.map(&:to_i)
     code_breaker_rows[code_breaker.attempts_made] = guess_arr
     code_breaker.attempts_made += 1
   end
