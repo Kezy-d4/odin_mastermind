@@ -10,20 +10,6 @@ class Game
   def initialize
     @board = Board.new
   end
-
-  def play_game
-    game_loop until board.game_over?
-    board.code_breaker_wins? ? you_win : you_lose
-    board.print_board
-  end
-
-  def game_loop
-    instructions(board.code_maker.secret_code_range, board.code_maker.secret_code_length)
-    board.print_board
-    board.update_next_code_breaker_row
-  end
 end
 
 # Testing
-my_game = Game.new
-my_game.play_game
