@@ -12,5 +12,3 @@ class HumanCodeBreaker
 end
 
 # Testing
-# my_human = HumanCodeBreaker.new
-# p my_human.prompt_guess
