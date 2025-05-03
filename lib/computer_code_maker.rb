@@ -8,9 +8,9 @@ class ComputerCodeMaker
     @secret_code_range = 1..6
     @secret_code_length = 4
     @secret_code = generate_secret_code
-    @feedback_pegs = { correct: "● ".colorize(:red),
-                       misplaced: "● ".colorize(:white),
-                       not_present: "● ".colorize(:grey) }
+    @feedback_pegs = { correct: "●".colorize(:red),
+                       misplaced: "●".colorize(:white),
+                       not_present: "●".colorize(:grey) }
   end
 
   def generate_secret_code
