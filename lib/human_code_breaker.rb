@@ -7,7 +7,7 @@ class HumanCodeBreaker
     @attempts_made = 0
   end
 
-  def prompt_guess
+  def prompt_attempt
     puts "Your guess?"
     gets.chomp
   end
