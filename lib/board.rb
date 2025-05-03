@@ -35,8 +35,8 @@ class Board
   end
 
   def print_board
-    game_over? ? code_maker.print_secret_code : code_maker.obscure_secret_code
-    # code_maker.print_secret_code # Cheating
+    # game_over? ? code_maker.print_secret_code : code_maker.obscure_secret_code
+    code_maker.print_secret_code # Cheating
     print_attempt_rows_with_inline_feedback
   end
 
@@ -59,13 +59,13 @@ class Board
     attempt_str.chars.map(&:to_i)
   end
 
-  def update_next_attempt_row_and_inline_feedback(attempt_str)
+  def update_next_attempt_row_and_inline_feedback(attempt_str) # rubocop:disable Metrics/AbcSize
     unless valid_attempt?(attempt_str)
       invalid
       return
     end
     attempt_arr = convert_attempt_to_array(attempt_str)
-    feedback_arr = generate_feedback(attempt_arr)
+    feedback_arr = code_maker.generate_feedback(attempt_arr)
     attempts_with_feedback[code_breaker.attempts_made][:attempt] = attempt_arr
     attempts_with_feedback[code_breaker.attempts_made][:feedback] = feedback_arr
     code_breaker.attempts_made += 1
@@ -74,3 +74,7 @@ end
 
 # Testing
 my_board = Board.new
+10.times do
+  my_board.print_board
+  my_board.update_next_attempt_row_and_inline_feedback(my_board.code_breaker.prompt_attempt)
+end
