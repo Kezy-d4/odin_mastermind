@@ -1,6 +1,6 @@
 require "colorize"
 
-class ComputerCodeMaker
+class CodeMaker
   attr_reader :secret_code_range, :secret_code_length, :secret_code,
               :feedback_pegs
 

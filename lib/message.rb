@@ -7,7 +7,7 @@ module Message
   end
 
   def welcome
-    puts "Welcome to a game of Mastermind! Duplicates are allowed in the code. " \
+    puts "Welcome to a game of Mastermind! Note that duplicates are allowed in the code. " \
          "Let's play."
   end
 

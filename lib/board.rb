@@ -1,6 +1,6 @@
 require "pry-byebug"
-require_relative "computer_code_maker"
-require_relative "human_code_breaker"
+require_relative "code_maker"
+require_relative "code_breaker"
 require_relative "message"
 
 class Board
@@ -10,8 +10,8 @@ class Board
   attr_accessor :attempts_with_feedback
 
   def initialize
-    @code_maker = ComputerCodeMaker.new
-    @code_breaker = HumanCodeBreaker.new
+    @code_maker = CodeMaker.new
+    @code_breaker = CodeBreaker.new
     @attempts_with_feedback = generate_initial_attempt_rows_with_inline_feedback
   end
 

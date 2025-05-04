@@ -1,4 +1,4 @@
-class HumanCodeBreaker
+class CodeBreaker
   attr_reader :attempts_available
   attr_accessor :attempts_made
 
