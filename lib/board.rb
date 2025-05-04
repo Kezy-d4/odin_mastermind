@@ -73,6 +73,7 @@ class Board
 end
 
 # Testing
+
 my_board = Board.new
 10.times do
   my_board.print_board
