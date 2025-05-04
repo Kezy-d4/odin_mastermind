@@ -12,6 +12,7 @@ class Game
   end
 
   def play_game
+    welcome
     game_loop until board.game_over?
     board.code_breaker_wins? ? you_win : you_lose
     board.print_board

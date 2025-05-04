@@ -6,6 +6,11 @@ module Message
          "#{secret_code_range.to_a.last}: "
   end
 
+  def welcome
+    puts "Welcome to a game of Mastermind! Duplicates are allowed in the code. " \
+         "Let's play."
+  end
+
   def invalid
     puts "Invalid previous entry! Try again."
   end
