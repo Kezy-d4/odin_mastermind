@@ -21,3 +21,9 @@ THE PLAN (PHASE 1)
     the computer wins. If the player is able to guess the code, they win, 
     so announce the number of turns it took for them to get guess the code.
 
+THE TASK (PHASE 2)
+Now refactor the code to allow the human player to choose whether they want to 
+be the creator of the secret code or the guesser. Build it out so that the 
+computer will guess if you decide to choose your own secret colors. You may
+choose to implement a computer strategy that follows the rules of the game or 
+you can modify these rules.
