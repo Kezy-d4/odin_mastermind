@@ -33,4 +33,16 @@ module Message
          "#{secret_code_length} digits long with each digit being somewhere " \
          "between #{secret_code_range.to_a.first}–#{secret_code_range.to_a.last}."
   end
+
+  def computer_wins
+    puts "The computer cracked your secret code!"
+  end
+
+  def computer_lost
+    puts "The computer failed to crack your secret code!"
+  end
+
+  def computer_guessing
+    puts "The computer will make its next guess..."
+  end
 end

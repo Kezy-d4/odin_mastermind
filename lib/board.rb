@@ -59,7 +59,7 @@ class Board
     attempt_str.chars.map(&:to_i)
   end
 
-  def update_next_attempt_row_and_inline_feedback(attempt_str) # rubocop:disable Metrics/AbcSize
+  def update_next_attempt_row_and_inline_feedback(attempt_str)
     unless valid_attempt?(attempt_str)
       invalid
       return

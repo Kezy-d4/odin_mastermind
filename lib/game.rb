@@ -27,10 +27,13 @@ class Game
     if code_breaker.instance_of?(HumanCodeBreaker)
       human_code_breaker_game_loop until board.game_over?
     else
-      puts "Computer code breaker not yet programmed."
-      return
+      computer_code_breaker_game_loop until board.game_over?
     end
-    board.code_breaker_wins? ? you_win : you_lose
+    if code_breaker.instance_of?(HumanCodeBreaker)
+      board.code_breaker_wins? ? you_win : you_lose
+    else
+      board.code_breaker_wins? ? computer_wins : computer_lost
+    end
     board.print_board
   end
 
@@ -40,9 +43,22 @@ class Game
     board.update_next_attempt_row_and_inline_feedback(board.code_breaker.prompt_attempt)
   end
 
+  def computer_code_breaker_game_loop
+    computer_guessing
+    board.print_board
+    sleep(3)
+    board.update_next_attempt_row_and_inline_feedback(computer_guess_randomly)
+  end
+
   def play_as_code_maker?
     choice = gets.chomp.downcase
     !%w[n no].include?(choice)
+  end
+
+  def computer_guess_randomly
+    str = ""
+    code_maker.secret_code_length.times { str << code_maker.secret_code_range.to_a.sample.to_s }
+    str
   end
 end
 
