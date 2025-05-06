@@ -9,7 +9,6 @@ module Message
   def welcome
     puts "Welcome to a game of Mastermind! Note that duplicates are allowed in the code. " \
          "Let's play."
-    sleep(3)
   end
 
   def invalid
@@ -27,5 +26,11 @@ module Message
   def choose_which_role_to_play
     puts "Would you like to play as the Code Maker and have the computer try " \
          "to guess your secret code, y/n?"
+  end
+
+  def choose_your_secret_code(secret_code_range, secret_code_length)
+    puts "Submit your secret code without any spaces. The code must be " \
+         "#{secret_code_length} digits long with each digit being somewhere " \
+         "between #{secret_code_range.to_a.first}–#{secret_code_range.to_a.last}."
   end
 end
