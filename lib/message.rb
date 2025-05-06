@@ -9,6 +9,7 @@ module Message
   def welcome
     puts "Welcome to a game of Mastermind! Note that duplicates are allowed in the code. " \
          "Let's play."
+    sleep(3)
   end
 
   def invalid
@@ -21,5 +22,10 @@ module Message
 
   def you_lose
     puts "You failed to crack the code. Better luck next time!"
+  end
+
+  def choose_which_role_to_play
+    puts "Would you like to play as the Code Maker and have the computer try " \
+         "to guess your secret code, y/n?"
   end
 end

@@ -9,9 +9,9 @@ class Board
   attr_reader :code_maker, :code_breaker
   attr_accessor :attempts_with_feedback
 
-  def initialize
-    @code_maker = CodeMaker.new
-    @code_breaker = CodeBreaker.new
+  def initialize(code_maker_class, code_breaker_class)
+    @code_maker = code_maker_class
+    @code_breaker = code_breaker_class
     @attempts_with_feedback = generate_initial_attempt_rows_with_inline_feedback
   end
 
