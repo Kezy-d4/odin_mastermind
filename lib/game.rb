@@ -56,12 +56,25 @@ class Game
   end
 
   def computer_guess_randomly
+    return computer_cheats if computer_can_cheat? && computer_should_cheat?
+
     str = ""
     code_maker.secret_code_length.times { str << code_maker.secret_code_range.to_a.sample.to_s }
     str
   end
+
+  def computer_cheats
+    code_maker.secret_code.map(&:to_s).join
+  end
+
+  def computer_should_cheat?
+    range = 1..(code_breaker.attempts_available * 1.1)
+    p range.to_a.sample == 1
+  end
+
+  def computer_can_cheat?
+    p code_breaker.attempts_made >= (code_breaker.attempts_available / 3).round
+  end
 end
 
 # Testing
-my_game = Game.new
-my_game.play_game
