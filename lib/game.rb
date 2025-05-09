@@ -69,5 +69,3 @@ class Game
       code_maker.secret_code_range == (1..6)
   end
 end
-
-Game.new.play_game
