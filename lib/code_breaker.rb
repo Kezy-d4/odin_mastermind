@@ -1,7 +1,7 @@
 class CodeBreaker
   def initialize(game)
     @game = game
-    @attempts_available = game.human_code_breaker_hard_mode ? 6 : 10
+    @attempts_available = 10
     @attempts_made = 0
   end
 
