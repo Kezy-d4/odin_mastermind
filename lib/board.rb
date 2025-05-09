@@ -1,75 +1,46 @@
 require "pry-byebug"
-require_relative "code_maker"
-require_relative "code_breaker"
-require_relative "message"
 
 class Board
-  include Message
-
-  attr_reader :code_maker, :code_breaker
-  attr_accessor :attempts_with_feedback
-
-  def initialize(code_maker_class, code_breaker_class)
-    @code_maker = code_maker_class
-    @code_breaker = code_breaker_class
+  def initialize(game)
+    @game = game
     @attempts_with_feedback = generate_initial_attempt_rows_with_inline_feedback
   end
 
+  attr_reader :game
+  attr_accessor :attempts_with_feedback
+
   def generate_initial_attempt_rows_with_inline_feedback
     attempts_with_feedback = []
-    code_breaker.attempts_available.times do
-      attempts_with_feedback <<
-        { attempt: Array.new(code_maker.secret_code_length, 0),
-          feedback: Array.new(code_maker.secret_code_length,
-                              code_maker.feedback_pegs[:not_present]) }
-    end
+    game.code_breaker.attempts_available.times { attempts_with_feedback << blank_row }
     attempts_with_feedback
   end
 
+  def blank_row
+    row = { attempt: [], feedback: [] }
+    game.code_maker.secret_code_length.times { row[:attempt] << 0 }
+    game.code_maker.secret_code_length.times do
+      row[:feedback] << game.code_maker.feedback_pegs[:not_present]
+    end
+    row
+  end
+
   def print_attempt_rows_with_inline_feedback
-    attempts_with_feedback.reverse_each do |hash|
-      hash[:attempt].each { |digit| print "#{digit} " }
-      hash[:feedback].each { |peg| print "#{peg} " }
+    attempts_with_feedback.reverse_each do |row|
+      row[:attempt].each { |digit| print "#{digit} " }
+      row[:feedback].each { |peg| print "#{peg} " }
       puts
     end
   end
 
+  def input_next_attempt_and_provide_feedback(input)
+    attempts_with_feedback[game.code_breaker.attempts_made][:attempt] = input
+    attempts_with_feedback[game.code_breaker.attempts_made][:feedback] =
+      game.code_maker.generate_feedback(input)
+    game.code_breaker.attempts_made += 1
+  end
+
   def print_board
-    game_over? ? code_maker.print_secret_code : code_maker.obscure_secret_code
-    # code_maker.print_secret_code # Cheating
+    game.game_over? ? game.code_maker.print_secret_code : game.code_maker.obscure_secret_code
     print_attempt_rows_with_inline_feedback
   end
-
-  def game_over?
-    code_breaker_wins? || code_breaker.attempts_exhausted?
-  end
-
-  def code_breaker_wins?
-    attempts_with_feedback.any? do |hash|
-      hash[:attempt] == code_maker.secret_code
-    end
-  end
-
-  def valid_attempt?(attempt_str)
-    true if attempt_str.length == code_maker.secret_code_length &&
-            attempt_str.chars.all? { |char| code_maker.secret_code_range.include?(char.to_i) }
-  end
-
-  def convert_attempt_to_array(attempt_str)
-    attempt_str.chars.map(&:to_i)
-  end
-
-  def update_next_attempt_row_and_inline_feedback(attempt_str)
-    unless valid_attempt?(attempt_str)
-      invalid
-      return
-    end
-    attempt_arr = convert_attempt_to_array(attempt_str)
-    feedback_arr = code_maker.generate_feedback(attempt_arr)
-    attempts_with_feedback[code_breaker.attempts_made][:attempt] = attempt_arr
-    attempts_with_feedback[code_breaker.attempts_made][:feedback] = feedback_arr
-    code_breaker.attempts_made += 1
-  end
 end
-
-# Testing

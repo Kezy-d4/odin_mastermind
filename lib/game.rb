@@ -1,80 +1,73 @@
 require "pry-byebug"
-require "colorize"
+require_relative "code_maker"
+require_relative "code_maker/human_code_maker"
+require_relative "code_maker/computer_code_maker"
+require_relative "code_breaker"
+require_relative "code_breaker/human_code_breaker"
+require_relative "code_breaker/computer_code_breaker"
 require_relative "board"
 require_relative "message"
-require_relative "code_maker"
-require_relative "code_maker/computer_code_maker"
-require_relative "code_maker/human_code_maker"
-require_relative "code_breaker"
-require_relative "code_breaker/computer_code_breaker"
-require_relative "code_breaker/human_code_breaker"
 
 class Game
   include Message
 
-  attr_reader :board, :code_maker, :code_breaker
-
   def initialize
-    welcome
-    choose_which_role_to_play
-    choice = play_as_code_maker?
-    @code_maker = choice ? HumanCodeMaker.new : ComputerCodeMaker.new
-    @code_breaker = choice ? ComputerCodeBreaker.new : HumanCodeBreaker.new
-    @board = Board.new(code_maker, code_breaker)
+    welcome_msg
+    @human_code_maker = play_as_code_maker?
+    @code_maker = human_code_maker ? HumanCodeMaker.new(self) : ComputerCodeMaker.new(self)
+    @code_breaker = human_code_maker ? ComputerCodeBreaker.new(self) : HumanCodeBreaker.new(self)
+    @board = Board.new(self)
+  end
+
+  attr_reader :code_maker, :code_breaker, :board, :human_code_maker
+
+  def play_as_code_maker?
+    choose_role_to_play_instructions_msg
+    input = gets.chomp.downcase
+    return true if %w[y yes].include?(input)
+
+    false
   end
 
   def play_game
-    if code_breaker.instance_of?(HumanCodeBreaker)
-      human_code_breaker_game_loop until board.game_over?
-    else
-      computer_code_breaker_game_loop until board.game_over?
-    end
-    if code_breaker.instance_of?(HumanCodeBreaker)
-      board.code_breaker_wins? ? you_win : you_lose
-    else
-      board.code_breaker_wins? ? computer_wins : computer_lost
-    end
-    board.print_board
+    puts human_code_maker ? computer_code_breaker_game_loop : human_code_breaker_game_loop
   end
 
   def human_code_breaker_game_loop
-    instructions(board.code_maker.secret_code_range, board.code_maker.secret_code_length)
+    until game_over?
+      board.print_board
+      board.input_next_attempt_and_provide_feedback(code_breaker.input_attempt)
+    end
     board.print_board
-    board.update_next_attempt_row_and_inline_feedback(board.code_breaker.prompt_attempt)
+    if code_breaker.code_breaker_wins?
+      human_code_breaker_wins_msg
+    else
+      human_code_breaker_loses_msg
+    end
   end
 
   def computer_code_breaker_game_loop
-    computer_guessing
+    until game_over?
+      board.print_board
+      board.input_next_attempt_and_provide_feedback(code_breaker.generate_attempt)
+    end
     board.print_board
-    sleep(3)
-    board.update_next_attempt_row_and_inline_feedback(computer_guess_randomly)
+    if code_breaker.code_breaker_wins?
+      computer_code_breaker_wins_msg
+    else
+      computer_code_breaker_loses_msg
+    end
   end
 
-  def play_as_code_maker?
-    choice = gets.chomp.downcase
-    !%w[n no].include?(choice)
+  def game_over?
+    code_breaker.code_breaker_wins? || code_breaker.attempts_exhausted?
   end
 
-  def computer_guess_randomly
-    return computer_cheats if computer_can_cheat? && computer_should_cheat?
-
-    str = ""
-    code_maker.secret_code_length.times { str << code_maker.secret_code_range.to_a.sample.to_s }
-    str
-  end
-
-  def computer_cheats
-    code_maker.secret_code.map(&:to_s).join
-  end
-
-  def computer_should_cheat?
-    range = 1..(code_breaker.attempts_available * 1.1)
-    p range.to_a.sample == 1
-  end
-
-  def computer_can_cheat?
-    p code_breaker.attempts_made >= (code_breaker.attempts_available / 3).round
+  def all_default_game_parameters?
+    code_breaker.attempts_available == 10 &&
+      code_maker.secret_code_length == 4 &&
+      code_maker.secret_code_range == (1..6)
   end
 end
 
-# Testing
+Game.new.play_game
