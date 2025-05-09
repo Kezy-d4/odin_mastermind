@@ -14,19 +14,25 @@ class Game
   def initialize
     welcome_msg
     @human_code_maker = play_as_code_maker?
+    @human_code_breaker_hard_mode = human_code_maker ? false : play_hard_mode?
     @code_maker = human_code_maker ? HumanCodeMaker.new(self) : ComputerCodeMaker.new(self)
     @code_breaker = human_code_maker ? ComputerCodeBreaker.new(self) : HumanCodeBreaker.new(self)
     @board = Board.new(self)
   end
 
-  attr_reader :code_maker, :code_breaker, :board, :human_code_maker
+  attr_reader :code_maker, :code_breaker, :board, :human_code_maker,
+              :human_code_breaker_hard_mode
+
+  def play_hard_mode?
+    choose_difficulty_instructions_msg
+    input = gets.chomp.downcase
+    %w[y yes].include?(input)
+  end
 
   def play_as_code_maker?
     choose_role_to_play_instructions_msg
     input = gets.chomp.downcase
-    return true if %w[y yes].include?(input)
-
-    false
+    %w[y yes].include?(input)
   end
 
   def play_game

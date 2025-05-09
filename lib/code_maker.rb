@@ -4,7 +4,7 @@ class CodeMaker
   def initialize(game)
     @game = game
     @secret_code_length = 4
-    @secret_code_range = 1..6
+    @secret_code_range = game.human_code_breaker_hard_mode ? 1..8 : 1..6
     @feedback_pegs = { correct: "●".colorize(:red),
                        misplaced: "●".colorize(:white),
                        not_present: "●".colorize(:grey) }

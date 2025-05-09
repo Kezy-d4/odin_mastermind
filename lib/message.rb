@@ -46,4 +46,9 @@ module Message
   def computer_guessing_msg
     puts "The computer is making its next guess..."
   end
+
+  def choose_difficulty_instructions_msg
+    print "Would you like to play on hard mode (less attempts, wider code " \
+          "range), y/n?: "
+  end
 end
