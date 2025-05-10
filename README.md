@@ -4,7 +4,7 @@ A CLI based Mastermind game developed as part of
 in Ruby. 
 
 # Video Demo
-
+[kezy_odin_mastermind_video_demo.webm](https://github.com/user-attachments/assets/06e3e93f-55b2-464c-94f0-57d4a8a68f53)
 
 # How to Install and Use
 To install, first clone this repository onto your local machine. Then, using 
