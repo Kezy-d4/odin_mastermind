@@ -32,12 +32,12 @@ Assuming all default game parameters, the computer Code Breaker will enact the
 following algorithm to try and crack your chosen secret code:
 
 Its first five attempts will consist of a sequence of four identical digits
-corresponding to the attempt:
-attempt#1: 1 1 1 1
-attempt#2: 2 2 2 2
-attempt#3: 3 3 3 3
-attempt#4: 4 4 4 4
-attempt#5: 5 5 5 5
+corresponding to the attempt: \
+attempt#1: 1 1 1 1 \
+attempt#2: 2 2 2 2 \
+attempt#3: 3 3 3 3 \
+attempt#4: 4 4 4 4 \
+attempt#5: 5 5 5 5 \
 
 From these hardcoded initial guesses, the algorithm is guaranteed to have enough 
 information to know each specific digit present in the code. From there, it 
